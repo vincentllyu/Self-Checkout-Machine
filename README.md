@@ -1,3 +1,3 @@
-# Self-Checkout-Machine
-All codes are in the /src folder
+# Self-Checkout-Machine<br>
+All codes are in the /src folder<br>
 Website at
