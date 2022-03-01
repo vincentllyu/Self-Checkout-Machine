@@ -244,10 +244,10 @@
           </code>
         </pre>
         <p style="text-align: left; padding: 0px 30px">
-Line 1 is to initialize HX711 object, with the DT GPIO pin and SCK GPIO pin that you have connected to your Pi.
-Line 2 The first parameter is the order in which the bytes are used to build the "long" value. The second parameter is the order of the bits inside each byte. There seems to be a bug in python that causes this setting to generate random outputs. I found that using ‘MSB’ ‘MSB’ to give out a good reading.
-Line 3 is to set a reference unit in grams so it can zero itself.
-Line 6 is the function to read the weight in grams. The parameter is the times you want it to read and get the average reading.
+Line 1 is to initialize HX711 object, with the DT GPIO pin and SCK GPIO pin that you have connected to your Pi.<br>
+Line 2 The first parameter is the order in which the bytes are used to build the "long" value. The second parameter is the order of the bits inside each byte. There seems to be a bug in python that causes this setting to generate random outputs. I found that using ‘MSB’ ‘MSB’ to give out a good reading.<br>
+Line 3 is to set a reference unit in grams so it can zero itself, here from Fig.4, we measured the weight of screws, nuts and the acrylic as the refference weight, so every time the system initialize, it has a weight to refference to.<br>
+Line 6 is the function to read the weight in grams. The parameter is the times you want it to read and get the average reading.<br>
 
         </p>
         <h4>Raspberry Pi Camera</h4>
@@ -289,7 +289,7 @@ Line 6 is the function to read the weight in grams. The parameter is the times y
           />
         <h4>Fig.5 System FSM</h4>
         <p style="text-align: left; padding: 0px 30px"> 
-          As is shown in Figure 3, we defined 9 states and conditions. Details are as follows.
+          As is shown in Figure 5, we defined 9 states and conditions. Details are as follows.
           The system starts with state 0 (welcome page), in state 0, some parameters like shopping list and total price are initialized. When the “start” button is pressed, it would turn into state 1 (scan mode). In scan mode, the camera is enabled and the video stream works to receive the barcodes continuously. As soon as a barcode is recognized in one video frame, the system would search it from the database. This step has three results: item recognized as an invalid item; item sold by the unit; item sold by the gram. If one item is recognized as an invalid item, the system would give the user a hint to scan the item again. Then after 2 seconds, the system would return back to state 1. If one item is sold by unit, the system would jump to state 2 and the item would be added to the shopping list, the total price is changed accordingly. If one item is sold by the gram, we come to state 3 with the enable of weight sensor. To get rid of the hand interference factor, we set up a threshold of 5 grams and a timer for 2 seconds. Once the detected weight is higher than 5 grams, the system would wait for 2 seconds and then record the average weight of 30 times. This step ensures the accuracy of weighing. The last step in this state is to update the shopping list and total price.
         </p> 
         <p style="text-align: left; padding: 0px 30px">
