@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Self Checkout Machine</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9
+      ]><script src="../../assets/js/ie8-responsive-file-warning.js"></script
+    ><![endif]-->
+    <!-- <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      hr{
+        margin-bottom: 70px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Self Checkout Machine</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#obj">Project Objective</a></li>
+            <li><a href="#design">Design & Testing</a></li>
+            <li><a href="#results">Results & Conclusion</a></li>
+            <li><a href="#futurework">Future Work</a></li>
+          </ul>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="starter-template">
+        <h1>Self Checkout Machine</h1>
+        <p class="lead">
+          ECE 5725 21Fall Final Project<br />Hongxi Jin (hj439), Yuanli Lu
+          (yl929)
+        </p>
+      </div>
+
+      <hr />
+      <div class="center-block">
+        <!-- <iframe width="640" height="360" src="https://youtu.be/emRBb0XGsAI" frameborder="0" allowfullscreen></iframe> -->
+        <iframe
+          width="640"
+          height="360"
+          src="https://www.youtube.com/embed/7ln4nVnBjSI"
+          title="Demonstration"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <h4 style="text-align: center">Demonstration Video</h4>
+      </div>
+
+      <hr id="intro" />
+
+      <div style="text-align: center">
+        <h2>Introduction</h2>
+        <p style="text-align: left; padding: 0px 30px">
+          Ever had a sudden craving for that Sour cream and onion chip? But you
+          didn’t wash your hair or didn’t have makeup on so you don’t want to
+          interact with anyone. Well, for a fast and interaction-less shopping
+          experience, you can use our self-checkout machine. Pull up your
+          hoodie, wear a mask, nobody would ever know you were here. This
+          project is to mimic one of the self-checkout machines such as in
+          Target or Walmart, it can read barcodes with a Pi Camera, weigh items
+          that are sold by the grams, and print receipts for your reference. It
+          also had an admin mode to delete items that you accidentally scanned
+          twice.
+        </p>
+      </div>
+
+      <hr id="obj" />
+
+      <div class="row">
+        <div class="col-md-4" style="text-align: center">
+          <img
+            class="img-rounded"
+            src="pics/system.jpeg"
+            alt="Generic placeholder image"
+            width="300"
+            height="240"
+          />
+        </div>
+        <div class="col-md-8" style="font-size: 18px">
+          <h2>Project Objective:</h2>
+          <ul>
+            <li>Build a self checkout system with admin mode.</li>
+            <li>Real-time barcodes detection using Pi camera.</li>
+            <li>Weigh items using weight sensor.</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr id="design" />
+
+      <div style="text-align: center">
+        <h2>Design and Testing</h2>
+        <br />
+        <h3>System Overview</h3>
+        <img
+          class="img-rounded"
+          src="pics/system.jpeg"
+          alt="system"
+          style="width: 50%"
+        />
+        <h4>Fig.1 System Showcase</h4>
+        <img
+          class="img-rounded"
+          src="pics/overview.jpeg"
+          alt="overview"
+          style="width: 50%"
+        />
+        <h4>Fig.2 System Connection Diagram</h4>
+        <p style="text-align: left; padding: 0px 30px">
+          There are four components in the system. Raspberry Pi, PiTFT Screen,
+          Thermal Printer, Digital Load Cell Weight Sensor, HX711 Weight Sensor
+          ADC Module, Raspberry Pi Camera.
+        </p>
+        <ul style="text-align: left; padding: 0px 30px">
+        <li>
+          Raspberry Pi 4: <br>
+          From Fig.2, you can see everything is connected to the
+          Raspberry Pi 4, which serves as the system controller, is powered by a
+          USB-C 110V power adapter.
+        </li>
+        <li>
+          PiTFT Screen: <br>
+          PiTFT serves as the User Interface. The user uses the
+          touch screen to navigate through the checkout process. It is connected
+          to the raspberry pi with a 40 pin break-out cable. And it controls can
+          be found in Lab 1’s handout manual [1].
+        </li>
+        <li>
+          Thermal Printer: <br>
+          Thermal Printer is used for printing receipts. It is
+          connected to the Raspberry Pi 4 through a USB-A cable. And needs a 6V
+          - 9V DC power supply. Digital Load Cell Weight Sensor and HX711 ADC
+          Module: The digital scale is connected to the HX711 ADC module. The
+          HX711 module serves both as an ADC as well as an amplifier. And it is
+          connected to the Raspberry Pi 4 through a customized serial interface.
+        </li>
+        <li>
+          Raspberry Pi Camera: <br>
+          The Pi Camera serves as the bar code reader. It
+          is connected to the Raspberry Pi 4 through a 22-pin camera connector.
+        </li>
+        </ul>
+        <br>
+        <h3>System Modules and Documentation</h3>
+        <h4>Raspberry Pi 4</h4>
+        <p style="text-align: left; padding: 0px 30px">The Pi 4 documentation can also be found in Lab1’s handout manual [1], how to set up and configure the environment.
+        </p>
+        <h4>PiTFT Screen</h4>
+        <p style="text-align: left; padding: 0px 30px">The PiTFT Screen configuration can also be found in Lab1’s handout manual [1]. And to use the PiTFT solely, we needed to add command line calls in the python script. As below:
+    
+          </p>
+          <pre>
+            <code>
+          os.putenv('SDL_VIDEODRIVER', 'fbcon')   # Display on piTFT
+          os.putenv('SDL_FBDEV', '/dev/fb0')
+          os.putenv('SDL_MOUSEDRV', 'TSLIB')     # Track mouse clicks on piTFT
+          os.putenv('SDL_MOUSEDEV', '/dev/input/touchscreen')
+          pygame.mouse.set_visible(False)
+            </code>
+          </pre>
+          <h4>Thermal Printer</h4>
+          <p style="text-align: left; padding: 0px 30px">Thermal Printer is controled through serial port communication. It will be names as “lp0” under /dev/usb/, we first need give read and write access to /dev/usb/lp0 to all users. And we can write to the USB serial through sudo echo “SampleText" > /dev/usb/lp0. This method is found on a website [2]. Python code example below:</p>
+          <pre>
+            <code>
+          os.system("sudo chmod 666 /dev/usb/lp0")
+          line = 'sudo echo \"{:^30}\\\\n\" > /dev/usb/lp0'.format('Sample Text')
+            </code>
+          </pre>
+          <h4>Digital Load Cell Weight Sensor and HX711 ADC Module</h4>
+          <img
+          class="img-rounded"
+          src="pics/hx711.png"
+          alt="HX711 Connection Diagram"
+          style="width: 40%"
+          />
+        <h4>Fig.3 HX711 Connection Diagram[3]</h4> <br>
+        <img
+          class="img-rounded"
+          src="pics/Weight.png"
+          alt="Weight"
+          style="width: 40%"
+          />
+        <h4>Fig.4 Weight Sensor Installation Showcase</h4>
+        <p style="text-align: left; padding: 0px 30px">
+          How the sensor works is that it senses the stretch in the metal bar shown in Fig.4. The white glue thingy is the sensor that reads the stretch and translates it into analog signals. The metal bar serves as leverage, and it is screwed down as in Fig.3. The four screws have different dimensions. Two on the left use metric M4 size screws, and the right two use metric M5 size screws.
+	We found a GitHub repository to configure the sensor and read in the data from HX711 module [4]. Sample code below:
+        </p>
+        <pre>
+          <code>
+          hx = HX711(DT_GPIO, SCK_GPIO)
+          hx.set_reading_format("MSB", "MSB")
+          hx.set_reference_unit(referenceUnit)
+          hx.reset()
+          hx.tare()
+          val = hx.get_weight(5)
+          </code>
+        </pre>
+        <p style="text-align: left; padding: 0px 30px">
+Line 1 is to initialize HX711 object, with the DT GPIO pin and SCK GPIO pin that you have connected to your Pi.
+Line 2 The first parameter is the order in which the bytes are used to build the "long" value. The second parameter is the order of the bits inside each byte. There seems to be a bug in python that causes this setting to generate random outputs. I found that using ‘MSB’ ‘MSB’ to give out a good reading.
+Line 3 is to set a reference unit in grams so it can zero itself.
+Line 6 is the function to read the weight in grams. The parameter is the times you want it to read and get the average reading.
+
+        </p>
+        <h4>Raspberry Pi Camera</h4>
+        <p style="text-align: left; padding: 0px 30px">Then we installed the PiCamera and OpenCV package.
+          One thing that’s worth mentioning is how we configured openCV to operate on the PiTFT. At first, we referred to the online tutorials about installing cv2 in RPi, but they did not work. Then we discussed with classmates and professor, and finally made all packages installed in RPi. 
+          One important reminder is that always use “sudo” to install all packages, otherwise, the packages could not run in PiTFT. 
+          detailed instructions below: 
+        </p>
+        <pre>
+          <code>
+            sudo pip3 install opencv-contrib-python==4.5.3.56 -i https://www.piwheels.org/simple
+            sudo apt-get update
+            sudo apt-get install libhdf5-dev -t buster
+            sudo apt-get install libatlas-base-dev -t buster
+            sudo apt-get install libjasper-dev -t buster
+            sudo apt-get install libqt4-test -t buster
+            sudo apt-get install libqtgui4 -t buster
+            sudo apt-get update
+            sudo pip3 install numpy==1.20.3 -i https://www.piwheels.org/simple
+          </code>
+        </pre>
+          <p style="text-align: left; padding: 0px 30px">
+          The actual version for OpenCV and NumPy may vary as it will certainly be upgraded in the future. Please refer to the website https://www.piwheels.org/simple/opencv-contrib-python/ [5]
+          and
+          https://www.piwheels.org/simple/numpy/ [5]
+            For prebuilt wheels that match your python version.
+            Credit to our classmate Chenxi Qian (cq53@cornell.edu) for giving us this method to configure OpenCV.
+          </p>
+        <br>
+        <h3>Software Design</h3>
+        <p style="text-align: left; padding: 0px 30px"> 
+          Then comes to the software design part. Our main purpose is to realize the basic function of checkout, including recognizing the barcode, searching for the price of the certain item in the database, weighing the item, making a payment and printing the receipt. In addition, it is necessary to allow the customers to edit their shopping list, since they may scan one item twice by mistake. However, the customers should not have full permission to edit the shopping list. Thus we consider adding an administration mode to our system, only the administrators who enter the right password can get into the admin mode and edit the items (for example delete items). The overall process is a bit complex, so we consider using the finite state machine (FSM) to describe the whole software design. 
+        </p>
+        <img
+          class="img-rounded"
+          src="pics/fsm.jpeg"
+          alt="fsm"
+          style="width: 60%"
+          />
+        <h4>Fig.5 System FSM</h4>
+        <p style="text-align: left; padding: 0px 30px"> 
+          As is shown in Figure 3, we defined 9 states and conditions. Details are as follows.
+          The system starts with state 0 (welcome page), in state 0, some parameters like shopping list and total price are initialized. When the “start” button is pressed, it would turn into state 1 (scan mode). In scan mode, the camera is enabled and the video stream works to receive the barcodes continuously. As soon as a barcode is recognized in one video frame, the system would search it from the database. This step has three results: item recognized as an invalid item; item sold by the unit; item sold by the gram. If one item is recognized as an invalid item, the system would give the user a hint to scan the item again. Then after 2 seconds, the system would return back to state 1. If one item is sold by unit, the system would jump to state 2 and the item would be added to the shopping list, the total price is changed accordingly. If one item is sold by the gram, we come to state 3 with the enable of weight sensor. To get rid of the hand interference factor, we set up a threshold of 5 grams and a timer for 2 seconds. Once the detected weight is higher than 5 grams, the system would wait for 2 seconds and then record the average weight of 30 times. This step ensures the accuracy of weighing. The last step in this state is to update the shopping list and total price.
+        </p> 
+        <p style="text-align: left; padding: 0px 30px">
+          It is worth noting that the admin mode should be accessible in the whole checkout process. So we use the physical button interrupt to enter admin mode (state 4 and state 5). Administrators can login to the admin mode in whatever state (using the right password), rolling down the shopping list and deleting the item that the customer does not need.
+        </p>
+        <p style="text-align: left; padding: 0px 30px">  
+          After finishing the scan process, the customer just presses the “check out” button to jump to the state 6 (payment mode). There are two choices: decline the payment and return back to the welcome page; make a payment and get to the state 7 (print receipt). In state 7, the thermal printer is enabled and receives the shopping list and total price data. Finally the receipt is printed through thermal printer and a pleasant shopping trip comes to an end. 
+        </p>
+        <h4> Database </h4>
+        <p style="text-align: left; padding: 0px 30px">
+          To save items and the corresponding prices, we import sqlite3 in python. 
+        </p>
+        <pre>
+          <code>
+          #Install sqlite3  
+          sudo apt-get install sqlite3    
+          sudo apt-get install sqlite3 -t buster     
+
+          #Create a new database
+          sqlite3 itemLibrary.db    
+          
+          #Create a table
+          CREATE TABLE products(barcode text, name text, price integer, weigh integer);    
+          
+          #Insert data into a table (Python)
+          conn = sqlite3.connect('itemsDB/itemLibrary.db')
+          c = conn.cursor()
+          c.execute("INSERT INTO products(barcode, name, price, weigh) VALUES(?, ?, ?, ?)", ("123456", "apple", 5.12, 1))    
+          
+          #Select item from the table
+          row = c.execute('SELECT * FROM products WHERE barcode = :bc', {'bc':barcode}).fetchall()   
+          </code>
+        </pre>
+        
+        <h4> Barcode Recognition </h4>
+        <p style="text-align: left; padding: 0px 30px"> To realize the real time barcode recognition, we have to install the VideoStream and pyzbar (based on cv2) packages[6]. Details are as follows. </p>
+        <pre> 
+          <code>
+          #Install pyzbar package 
+          pip3 install pyzbar
+          #Install video stream package
+          pip install imutils
+          </code>
+        </pre>
+
+      </div>
+
+      <hr id="results" />
+      <div style="text-align: center">
+        <h2>Results & Conclusion</h2>
+        <p style="text-align: left; padding: 0px 30px">From the demo video, you can see that we have achieved everything in the FSM and every module worked as expected. Though for the thermal printer, we tried to import a package so it can print pictures and QR codes, we couldn’t figure out how it worked and it wasn’t communicating to our printer. This would be put in the part of the future work.
+        </p>
+      </div>
+
+      <hr id="futurework" />
+
+      <div style="text-align: center">
+        <h2>Future Work</h2>
+      </div>
+        <p style="text-align: left; padding: 0px 30px">
+          <ul>
+        <li>Instead of just reading bar codes from items and matching them with items in our database, we can also add a function in admin mode to scan items, not in the database and add them into the database.
+        </li>
+        <li>
+          For the weight sensor installation, we should use screw spacers instead of nuts. Nuts would get tighter and hold in place with each other while screwing, and hard for us to get a good space between the acrylic sheet and the weight sensor.
+        </li>
+        <li>
+          For the thermal printer, instead of writing through serial, we could implement a better package so it can print out pictures and QR codes.
+            
+        </li>
+        <li>
+          Make a better-looking container.
+        </li>
+        <li>
+          Add a power adapter for the thermal printer so it can plug into the socket on the wall.
+        </li>
+      </ul>
+        </p>
+
+      <hr />
+
+      <div class="row" style="text-align: center">
+        <h2>Work Distribution</h2>
+        <div class="col-md-6" style="font-size: 16px">
+          <h3>Yuanli Lu</h3>
+          <p class="lead">yl929@cornell.edu</p>
+          <p>
+            Hardware installation, Wrote functions for handoff between hardware and software. UI Implementation.
+          </p>
+        </div>
+
+        <div class="col-md-6" style="font-size: 16px">
+          <h3>Hongxi Jin</h3>
+          <p class="lead">hj439@cornell.edu</p>
+          <p>SFM Realization, Software design and implementation.</p>
+        </div>
+      </div>
+
+      <hr />
+      <div style="font-size: 18px">
+        <h2>Parts List</h2>
+        <ul>
+          <li>Raspberry Pi $35.00</li>
+          <li>Raspberry Pi Camera $9.99</li>
+          <a href="https://www.adafruit.com/product/2753?gclid=Cj0KCQiA-K2MBhC-ARIsAMtLKRtND_Bf2aeF7bqqOCaLXWz0JNPSjbeutpc24ED3o5dHb48AVqgIrXgaAu3PEALw_wcB"
+            ><li>Thermal Printer $39.95            </li></a
+          >
+          <li>Screws $8.00</li>
+          <a href="https://www.amazon.com/AuBreey-Digital-Portable-Electronic-Weighing/dp/B0716C8JM9/ref=sr_1_5?keywords=electronic%2Bscale%2Bmodule&qid=1636571076&sr=8-5&th=1"><Li>Weight sensor HX711 $9.99          </Li> </a>
+        </ul>
+        <h3>Total: $102.93</h3>
+      </div>
+      <hr />
+      <div style="font-size: 18px">
+        <h2>References</h2>
+        [1]Lab1 handout manual <br>
+        <a href="https://www.theamplituhedron.com/articles/How-to-use-a-tiny-thermal-printer-with-Raspberry-Pi/"
+          >[2] Thermal Printer</a
+        ><br />
+        <a href="https://www.amazon.com/ALAMSCN-Digital-Weighing-Portable-Electronic/dp/B08KRWY43Y/ref=sr_1_6?crid=21F8U6XTE6A53&keywords=hx711&qid=1646001923&s=industrial&sprefix=hx71%2Cindustrial%2C207&sr=1-6">[3] HX711 - Amazon</a><br />
+        <a href="https://github.com/tatobari/hx711py">[4] HX711 Library</a><br />
+        <a href="https://www.piwheels.org/simple/"
+          >[5] Piwheels</a
+        ><br />
+        <a href="https://pyimagesearch.com/2014/12/15/real-time-barcode-detection-video-python-opencv/">[6] Pyzbar</a><br />
+        <a href="https://picamera.readthedocs.io/">[7] PiCamera</a><br />
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <h2>Code Appendix</h2>
+        </div>
+        <a href="https://picamera.readthedocs.io/" style="font-size: 18px">Github repository</a> <br> <br>
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery.min.js"><\/script>'
+        );
+    </script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+</html>
+
+<style>
+  pre code {
+      background-color: #eee;
+      border: 1px solid #999;
+      display: block;
+      padding: 5px;
+      text-align: left;
+  }
+</style>
