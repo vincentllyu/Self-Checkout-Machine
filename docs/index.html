@@ -87,6 +87,7 @@
           height="360"
           src="https://www.youtube.com/embed/7ln4nVnBjSI"
           title="Demonstration"
+          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
@@ -106,7 +107,7 @@
           project is to mimic one of the self-checkout machines such as in
           Target or Walmart, it can read barcodes with a Pi Camera, weigh items
           that are sold by the grams, and print receipts for your reference. It
-          also had an admin mode to delete items that you accidentally scanned
+          also has an admin mode to delete items that you accidentally scanned
           twice.
         </p>
       </div>
@@ -136,7 +137,7 @@
       <hr id="design" />
 
       <div style="text-align: center">
-        <h2>Design & Testing</h2>
+        <h2>Design and Testing</h2>
         <br />
         <h3>System Overview</h3>
         <img
@@ -211,6 +212,7 @@
             <code>
           os.system("sudo chmod 666 /dev/usb/lp0")
           line = 'sudo echo \"{:^30}\\\\n\" > /dev/usb/lp0'.format('Sample Text')
+          os.system(line)
             </code>
           </pre>
           <h4>Digital Load Cell Weight Sensor and HX711 ADC Module</h4>
@@ -223,7 +225,7 @@
         <h4>Fig.3 HX711 Connection Diagram[3]</h4> <br>
         <img
           class="img-rounded"
-          src="pics/weight.png"
+          src="pics/Weight.png"
           alt="Weight"
           style="width: 40%"
           />
@@ -330,7 +332,7 @@ Line 6 is the function to read the weight in grams. The parameter is the times y
           #Install pyzbar package 
           pip3 install pyzbar
           #Install video stream package
-          pip3 install imutils
+          pip install imutils
           </code>
         </pre>
 
@@ -367,10 +369,11 @@ Line 6 is the function to read the weight in grams. The parameter is the times y
         </li>
       </ul>
         </p>
+
       <hr />
 
       <div class="row" style="text-align: center">
-        <h2>Work Distribution</h2>
+        <h2>Contributions</h2>
         <div class="col-md-6" style="font-size: 16px">
           <h3>Yuanli Lu</h3>
           <p class="lead">yl929@cornell.edu</p>
@@ -382,7 +385,7 @@ Line 6 is the function to read the weight in grams. The parameter is the times y
         <div class="col-md-6" style="font-size: 16px">
           <h3>Hongxi Jin</h3>
           <p class="lead">hj439@cornell.edu</p>
-          <p>FSM Realization, Software design and implementation.</p>
+          <p>SFM Realization, Software design and implementation.</p>
         </div>
       </div>
 
@@ -403,7 +406,7 @@ Line 6 is the function to read the weight in grams. The parameter is the times y
       <hr />
       <div style="font-size: 18px">
         <h2>References</h2>
-        [1]Lab1 handout manual <br>
+        <a href="pics/Lab_1_fall_2021_v5.pdf">[1] Lab1 handout manual <br>
         <a href="https://www.theamplituhedron.com/articles/How-to-use-a-tiny-thermal-printer-with-Raspberry-Pi/"
           >[2] Thermal Printer</a
         ><br />
@@ -421,7 +424,7 @@ Line 6 is the function to read the weight in grams. The parameter is the times y
       <div class="row">
         <h2>Code Appendix</h2>
         </div>
-        <a href="https://github.com/vincentllyu/Self-Checkout-Machine" style="font-size: 18px">Github repository</a> <br> <br>
+        <a href="https://picamera.readthedocs.io/" style="font-size: 18px">Github repository</a> <br> <br>
     </div>
     <!-- /.container -->
 
